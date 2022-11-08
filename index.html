@@ -10,6 +10,8 @@
  
  <body>
  
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" style="cursor: pointer; margin-top: 10px; margin-left: 10px; width: 50px; height: 50px; background: white; border-radius: 50%; padding: 2px; color: black" onclick="window.location.href = 'https://github.com/evanjt06/apcs-chatbot'" />
+   
      <div class="chat-popup animate__animated animate__bounceInRight" id="chatbox">
          <div class="form-container">
  
@@ -26,9 +28,7 @@
  
          <div class="chat-body">
              <div class="messages-list">
-                 <div class="message-bot">Hello Biology students! I am Mr. Biology, a chatbot designed to answer questions about niches, competition, population, communities, keystone species, and more. If you want to exit this chatbot, you can type in "goodbye".
-                    <br /> <br />
-                    Let's get started! What's your name?
+                 <div class="message-bot">Hi Biology students! My name is Mr. Biology. What's your name?
                 </div>
                 
              </div> 
@@ -240,7 +240,7 @@
      </style>
      <script>
 
-        let hasSaidNameYet = false;
+        let global = 0;
  
          document.getElementById("chat").addEventListener("click", () => {
              if (document.getElementById("chatbox").style.display === "block") {
@@ -310,13 +310,13 @@
 
              let fresponse = "";
 
-             if (!hasSaidNameYet) {
+             if (global === 0) {
 
-                const possibleQ = ["niches", "keystone species", "communities", "populations", "competition"]
 
-                fresponse = "Hello " + uip + "! Feel free to ask a question about " + possibleQ[Math.floor(Math.random() * possibleQ.length)] + " here."
-                hasSaidNameYet = true;
+                fresponse = "Hi " + uip + "! You can ask me anything about niches, competition, population, communities, keystone species, and more. If you want to stop my service, you can type in 'goodbye' to exit the chatbot window."
 
+                global++;           
+             
              } else if (ifKeywordExists) {
                 fresponse = personalizedResponse(uip.toLowerCase());
 
@@ -333,7 +333,7 @@
                      document.getElementById("chatbox").style.display = "none";
                      document.getElementById("chat").children[0].src = "https://s3.us-west-2.amazonaws.com/calc.masa.space/speech-bubble.svg"
                  }, 750)
-               }, 1000)
+               }, 1500)
                
 
              } else {
@@ -383,7 +383,6 @@
          // unsure answer - dunno()
          const dunno = () => {
 
-            // randomized response using Math.random() if chatbot doesnt understand
             const dunnoResponses = ["Please rephrase your response.", "Sorry, I don't understand.", "I'm not sure.", "Can you ask another question? I don't understand.", "Sorry, I'm not sure."]
          
             const possibleQ = ["niches", "keystone species", "communities", "populations", "competition"]
@@ -395,7 +394,7 @@
 
          // goodbye func
          const goodbye = () => {
-            return "Goodbye, thank you for using the chatbot."
+            return "I hope I answered all the questions you had. Bye!"
          }
 
          //
