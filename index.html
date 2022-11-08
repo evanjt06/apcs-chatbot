@@ -1,0 +1,500 @@
+<!-- 
+
+ 4. make methods for each scenario
+
+ -->
+
+ <!DOCTYPE html>
+ <html>
+ 
+ <head>
+     <title>Bio APCS Chatbot</title>
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+ </head>
+ 
+ <body>
+ 
+     <div class="chat-popup animate__animated animate__bounceInRight" id="chatbox">
+         <div class="form-container">
+ 
+             <div class="chat-header">
+                 <img style="border-radius: 50%; background: white; padding: 5px;"
+                     src="http://calc.masa.space/robot.svg" alt="pic" width=40 />
+                 <div class="chat-header-sub">
+                     <span class="chat-header-sub2">Chat with</span>
+                     <span class="chat-header-sub2" style="font-size: 22px !important; margin-top: 5px !important">Mr.
+                         Biology
+                 </div>
+             </div>
+         </div>
+ 
+         <div class="chat-body">
+             <div class="messages-list">
+                 <div class="message-bot">Hello Biology students! I am Mr. Biology, a chatbot designed to answer questions about niches, competition, population, communities, keystone species, and more. What's your name? </div>
+             </div>
+ 
+             <div class="chat-input">
+                 <input type="text" class="chat-inputbox" id="chat-inputbox" placeholder="Ask your questions here..." />
+                 <button class="chat-input-submit btn" id="chat-input-submit">
+                     <img src="http://calc.masa.space/send.svg" width="20" />
+                 </button>
+             </div>
+         </div>
+     </div>
+     </div>
+ 
+     <div class="chatbot-container btn animate__animated animate__flipInX" id="chat">
+         <img src="http://calc.masa.space/speech-bubble.svg" alt="Chat" width=30 />
+     </div>
+     </div>
+ 
+     <style>
+         * {
+             margin: 0;
+             padding: 0;
+             box-sizing: border-box;
+         }
+ 
+         body {
+            background-image: url("https://images.unsplash.com/photo-1595366586798-11e020008a2b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1474&q=80");
+            background-size: 100%;
+         }
+ 
+         .chat-popup {
+             border-radius: 20px;
+             width: 390px;
+             height: 550px;
+             position: fixed;
+             bottom: 120px;
+             right: 15px;
+ 
+             background: white;
+             display: block;
+         }
+ 
+         .chat-input {
+ 
+             width: 93%;
+ 
+             position: absolute;
+             bottom: 8px;
+             z-index: 100;
+ 
+             display: flex;
+             flex-direction: row;
+ 
+             margin-bottom: 15px;
+             padding-top: 15px;
+         }
+ 
+         .chat-input-submit {
+             border-radius: 10px; 
+             opacity: 0.75; 
+             background: #537895;
+         }
+         .chat-input-submit:hover {
+             background: rgba(0,0,0,.8);
+             transition: all .5s ease;
+         }
+ 
+         .chat-inputbox {
+             width: 100%;
+             padding: 1rem;
+             background: rgba(0, 0, 0, 0.75);
+             color: #fff;
+             border: 0;
+             border-radius: 10px;
+             font-size: 1rem;
+             outline: 0;
+ 
+             margin-right: 10px;
+         }
+ 
+         .chat-body {
+             max-height: 410px;
+             padding: 18px;
+             display: flex;
+             flex-direction: column;
+             overflow-y: scroll;
+         }
+ 
+         .message-bot {
+             max-width: 90%;
+             background: rgb(240, 242, 247);
+             padding: 12px;
+             border-radius: 15px;
+             margin-bottom: 20px;
+         }
+ 
+         .message-user {
+             margin-left: auto;
+             width: 90%;
+             background: #bbcde5;
+             padding: 12px;
+             border-radius: 15px;
+             margin-bottom: 20px;
+         }
+ 
+         .form-container {
+             border-top-left-radius: 20px;
+             border-top-right-radius: 20px;
+             background-image: linear-gradient(45deg, #09203f 0%, #537895 100%);
+             display: flex;
+             flex-direction: column;
+         }
+ 
+         .chat-header {
+             padding: 20px;
+             display: flex;
+         }
+ 
+         .chat-header-sub {
+             margin-left: 15px;
+             display: flex;
+             flex-direction: column;
+         }
+ 
+         .chat-header-sub2 {
+             font-size: 16px;
+             display: block;
+             line-height: 15px;
+             margin-top: 4px;
+             color: white;
+         }
+ 
+ 
+         .chatbot-container {
+             position: fixed;
+             bottom: 20px;
+             right: 20px;
+             display: flex;
+             justify-content: center;
+             align-items: center;
+             background: #7765E3;
+             margin: 12px;
+             width: 75px;
+             height: 75px;
+             border-radius: 50%;
+             cursor: pointer;
+         }
+ 
+         .chatbot-container:hover {
+             background: #FFC857;
+             transition: .3s;
+         }
+ 
+         /* Portrait */
+         @media only screen 
+         and (min-device-width: 375px) 
+         and (max-device-width: 812px) 
+         and (-webkit-min-device-pixel-ratio: 3)
+         and (orientation: portrait) { 
+             .chat-popup {
+                 width: 300px;
+             }
+         }
+ 
+         /* 2340x1080 pixels at 476ppi */
+ @media only screen 
+     and (device-width: 375px) 
+     and (device-height: 812px) 
+     and (-webkit-device-pixel-ratio: 3) {
+ 
+         .chat-popup {
+                 width: 300px;
+             }
+      }
+ 
+      /* 2532x1170 pixels at 460ppi */
+ @media only screen 
+     and (device-width: 390px) 
+     and (device-height: 844px) 
+     and (-webkit-device-pixel-ratio: 3) {  .chat-popup {
+                 width: 300px;
+             }}
+ 
+     /* 1792x828px at 326ppi */
+ @media only screen 
+     and (device-width: 414px) 
+     and (device-height: 896px) 
+     and (-webkit-device-pixel-ratio: 2) {  .chat-popup {
+                 width: 300px;
+             }}
+ 
+     /* 2436x1125px at 458ppi */
+ @media only screen 
+     and (device-width: 375px) 
+     and (device-height: 812px) 
+     and (-webkit-device-pixel-ratio: 3) {  .chat-popup {
+                 width: 300px;
+             }}
+ 
+     /* 2688x1242px at 458ppi */
+ @media only screen 
+     and (device-width: 414px) 
+     and (device-height: 896px) 
+     and (-webkit-device-pixel-ratio: 3) { .chat-popup {
+                 width: 300px;
+             } }
+ 
+     </style>
+     <script>
+
+        let hasSaidNameYet = false;
+ 
+         document.getElementById("chat").addEventListener("click", () => {
+             if (document.getElementById("chatbox").style.display === "block") {
+                 document.getElementById("chatbox").style.right = "-450px"
+                 document.getElementById("chatbox").style.transition = ".75s"
+                 setTimeout(() => {
+                     document.getElementById("chatbox").style.display = "none";
+                     document.getElementById("chat").children[0].src = "http://calc.masa.space/speech-bubble.svg"
+                 }, 750)
+              
+             } else {
+                 document.getElementById("chatbox").style.right = "15px"
+                 document.getElementById("chatbox").style.display = "block";
+                 document.getElementById("chat").children[0].src = "http://calc.masa.space/right-arrow.svg"
+             }
+         })
+ 
+         document.getElementById("chat-input-submit").addEventListener("click", () => {
+             appendTextToChat()
+         })
+ 
+         document.getElementById('chat-inputbox').onkeypress = (e) => {
+             if (!e) {
+                 e = window.event;
+             }
+             var keyCode = e.code || e.key;
+             if (keyCode == 'Enter'){
+                 appendTextToChat();
+                 return false;
+             }
+         }
+ 
+         const appendTextToChat = () => {
+             const input = document.getElementById("chat-inputbox")
+             if (input.value !== "") {
+                 const d = document.createElement("div")
+                 d.classList.add("message-user")
+                 const iv = input.value;
+                 d.innerText = iv;
+                 document.querySelector(".messages-list").appendChild(d);
+                 document.getElementById("chat-inputbox").value = "";
+                 document.querySelector(".chat-body").scrollTop = document.querySelector(".chat-body").scrollHeight;
+ 
+                 // now given user input, append the bot's response
+                 scanUserInput(iv)
+             }
+         }
+ 
+         const scanUserInput = (uip) => {
+           
+            const possibleKeywords = ["niche", "community", "population", "immigration", "emigration", "keystone", "competition", "species"];
+
+            let ifKeywordExists = 
+                possibleKeywords.map((item) => {
+                    return (uip.toLowerCase().includes(item))
+                })
+            // iterate over array to check if it includes a true value
+            for (let i = 0; i < ifKeywordExists.length; i++) {
+                if (ifKeywordExists[i] === true) {
+                    ifKeywordExists = true;
+                }
+            }
+            // if still array containing values of false, then set value to false
+            if (Array.isArray(ifKeywordExists)) {
+                ifKeywordExists = false;
+            }
+
+             let fresponse = "";
+
+             if (!hasSaidNameYet) {
+                fresponse = "Hello " + uip + "! Feel free to ask your questions here."
+                hasSaidNameYet = true;
+
+             } else if (ifKeywordExists) {
+                fresponse = personalizedResponse(uip.toLowerCase());
+
+             } else if (uip.toLowerCase() === "goodbye") {
+
+               // goodbye method
+               fresponse = goodbye();
+
+               // close chatbot window
+               setTimeout(() => {
+                document.getElementById("chatbox").style.right = "-450px"
+                 document.getElementById("chatbox").style.transition = ".75s"
+                 setTimeout(() => {
+                     document.getElementById("chatbox").style.display = "none";
+                     document.getElementById("chat").children[0].src = "http://calc.masa.space/speech-bubble.svg"
+                 }, 750)
+               }, 1000)
+               
+
+             } else {
+                 // does not match anything
+                 fresponse = dunno();
+             }
+ 
+             const input = document.getElementById("chat-inputbox")
+             const d = document.createElement("div")
+             d.classList.add("message-bot")
+             d.innerText = fresponse; 
+ 
+             setTimeout(() => {
+                 document.querySelector(".messages-list").appendChild(d);
+                 document.querySelector(".chat-body").scrollTop = document.querySelector(".chat-body").scrollHeight;
+             },200)
+         }
+
+         // see if input contains
+         const personalizedResponse = (input) => {
+            if (input.includes("niche")) {
+                return niche(input);
+            } 
+            else if (input.includes("community")) {
+                return community(input);
+            }   
+            else if (input.includes("population")) {
+                return population(input);
+
+            } else if (input.includes("immigration")) {
+                return immigration(input);
+            }
+             else if (input.includes("emigration")) {
+                return emigration(input);
+            }
+             else if (input.includes("keystone")) {
+                return keystone(input);
+            }
+             else if (input.includes("competition")) {
+                return competition(input);
+            }
+            else if (input.includes("species")) {
+                return species(input);
+            }
+         }
+
+         // unsure answer - dunno()
+         const dunno = () => {
+            return "Sorry, I don't understand. Please rephrase your response."
+         }
+
+         // goodbye func
+         const goodbye = () => {
+            return "Goodbye, thank you for using the chatbot."
+         }
+
+         //
+         // subfunctions for the personalizedResponse() method
+         //
+         const niche = (input) => {
+            if (input.includes("what is a niche") || input.includes("define niche") || input.includes("whats a niche") || input.includes("what's a niche")) {
+                return "A niche is the perfect environment in which an organism lives in."
+            } else if (input.includes("more than one animal occupies the same niche")) {
+                return "They compete until one species dies"
+            } else if (input.includes("example of niche") || input.includes("example of a niche")) {
+                return "An example of a niche is a polar bear in antarctica"
+            } else if (input.includes("interact with each other")) {
+                return "They can interact with each other through abiotic conditions, food type, behavior"
+            } else if (input.includes("can more than one animal occupy the same niche")) {
+                return "No"
+            } else {
+                return "A niche is the perfect environment in which an organism lives in."
+            }
+         }
+         
+         const community = (input) => {
+            if (input.includes("define community") || input.includes("whats a community") || input.includes("what's a community") || input.includes("what is a community")) {
+                return "A community is an interacting group of various species in a common location."
+            } else if (input.includes("community larger than") || input.includes("community bigger than")) {
+                return "A community is larger than a population"
+            } else if (input.includes("difference between")) {
+                return "A population is a group of the same species living in the same area. A community is a group of different species living in the same area."
+            } else {
+                return "A community is an interacting group of various species in a common location."
+            }
+         }
+
+         const population = (input) => {
+            if (input.includes("define population") || input.includes("whats a population") || input.includes("what's a population") || input.includes("what is a population")) {
+                return "A population is a group of the same species living in the same area."
+            } else if (input.includes("population smaller than")) {
+                return "A population is smaller than a community."
+            } else if (input.includes("difference between")) {
+                return "A population is a group of the same species living in the same area. A community is a group of different species living in the same area."
+            } else {
+                return "A population is a group of the same species living in the same area."
+            }
+         }
+
+         const immigration = (input) => {
+            if (input.includes("define immigration") || input.includes("whats immigration") || input.includes("what's immigration") || input.includes("what is immigration")) {
+                return "Immigration is when the organism is moving into a new place"
+            } else if (input.includes("difference between")) {
+                return "Emigration is leaving an area and immigration is going into an area."
+            } else {
+                return "Immigration is when the organism is moving into a new place"
+            }
+         }
+
+         const emigration = (input) => {
+            if (input.includes("define emigration") || input.includes("whats emigration") || input.includes("what's emigration") || input.includes("what is emigration")) {
+                return "Emigration is the place the organism is moving out of."
+            } else if (input.includes("difference between")) {
+                return "Emigration is leaving an area and immigration is going into an area."
+            } else {
+                return "Emigration is the place the organism is moving out of."
+            }
+         }
+
+         const keystone = (input) => {
+            if (input.includes("define keystone") || input.includes("whats keystone") || input.includes("what's keystone")  || input.includes("what is keystone") || input.includes("what are keystone")) {
+                return "Keystone species are a species the entire ecosystem relies on, without the species the ecosystem would collapse. both abiotic and biotic factors would be affect"
+            } else if (input.includes("removed")) {
+                return "If the keystone species is removed from an environment, then the entire ecosystem will be destroyed since the keystone species is very important to the environment."
+            } else {
+                return "Keystone species are a species the entire ecosystem relies on, without the species the ecosystem would collapse. both abiotic and biotic factors would be affect"
+            }
+         }
+
+         const competition = (input) => {
+
+            if (input.includes("define competition") || input.includes("whats competition") || input.includes("what's competition")) {
+                return "Competition is animals fighting for the same resources."
+            } else if (input.includes("when does competition occur")) {
+                return "Competition occurs when two species occupy the same niche"
+            } else if (input.includes("necessary") || input.includes("important")) {
+                return "Competition is important because of population control. It makes sure the population doesn't go over carrying capacity"
+            }  else if (input.includes("different types") || input.includes("types")) {
+                return "The different types of competition are competition for resources, food, habitat, and partners"
+            } else if (input.includes("how does competition affect the population") || input.includes("how does competition influence the population")) {
+                return "Because it maintains equilibrium"
+            } else if (input.includes("how does competition affect an organism's niche") || input.includes("how does competition affect an organisms niche")) {
+                return "Two organisms with the same niche would have to compete for same resources which would lead to less population of the worse species"
+            } else {
+                return "Competition is animals fighting for the same resources."
+            }
+         }
+
+         const species = (input) => {
+            if (input.includes("define species") || input.includes("whats species") || input.includes("what's species") || input.includes("what is a species") || input.includes("what are species")) {
+                return "A species is a type of living organism."
+            } else if (input.includes("adapt")) {
+                return "Species can adapt to competition through immigration, emigration, and evolution"
+            } else if (input.includes("highest in the food chain")) {
+                return "Apex predators are highest in the food chain"
+            } else {
+                return "A species is a type of living organism."
+            }
+         }
+ 
+     </script>
+ </body>
+ 
+ 
+ </html>
