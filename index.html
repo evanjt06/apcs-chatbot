@@ -26,8 +26,12 @@
  
          <div class="chat-body">
              <div class="messages-list">
-                 <div class="message-bot">Hello Biology students! I am Mr. Biology, a chatbot designed to answer questions about niches, competition, population, communities, keystone species, and more. What's your name? </div>
-             </div>
+                 <div class="message-bot">Hello Biology students! I am Mr. Biology, a chatbot designed to answer questions about niches, competition, population, communities, keystone species, and more. If you want to exit this chatbot, you can type in "goodbye".
+                    <br /> <br />
+                    Let's get started! What's your name?
+                </div>
+                
+             </div> 
  
              <div class="chat-input">
                  <input type="text" class="chat-inputbox" id="chat-inputbox" placeholder="Ask your questions here..." />
@@ -307,7 +311,10 @@
              let fresponse = "";
 
              if (!hasSaidNameYet) {
-                fresponse = "Hello " + uip + "! Feel free to ask your questions here."
+
+                const possibleQ = ["niches", "keystone species", "communities", "populations", "competition"]
+
+                fresponse = "Hello " + uip + "! Feel free to ask a question about " + possibleQ[Math.floor(Math.random() * possibleQ.length)] + " here."
                 hasSaidNameYet = true;
 
              } else if (ifKeywordExists) {
@@ -375,7 +382,15 @@
 
          // unsure answer - dunno()
          const dunno = () => {
-            return "Sorry, I don't understand. Please rephrase your response."
+
+            // randomized response using Math.random() if chatbot doesnt understand
+            const dunnoResponses = ["Please rephrase your response.", "Sorry, I don't understand.", "I'm not sure.", "Can you ask another question? I don't understand.", "Sorry, I'm not sure."]
+         
+            const possibleQ = ["niches", "keystone species", "communities", "populations", "competition"]
+
+            const x = "Maybe you can ask me a question about " + possibleQ[Math.floor(Math.random() * possibleQ.length)] + "?"
+
+            return dunnoResponses[Math.floor(Math.random() * dunnoResponses.length)] + " " + x;
          }
 
          // goodbye func
