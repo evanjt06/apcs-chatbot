@@ -70,7 +70,7 @@ const scanUserInput = (uip) => {
 
     if (global === 0) {
 
-        fresponse = "Hi " + uip + "! You can ask me anything about niches, competition, population, community, keystone species, immigration, emigration, and more. If you want to stop my service, you can type in 'goodbye' to exit the chatbot window."
+        fresponse = "Hi " + uip + "! You can ask me anything about niches, competition, population, species, keystone species, immigration, emigration, and more. If you want to stop my service, you can type in 'goodbye' to exit the chatbot window."
 
         global++;
 
@@ -230,7 +230,7 @@ const competition = (input) => {
 
     const r = ["when competition occurs?", "why competition is important?", "about the different types of competition?", "how competition affects the population?"];
 
-    if (input.includes("define competition") || input.includes("whats competition") || input.includes("what's competition")) {
+    if (input.includes("define competition") || input.includes("whats competition") || input.includes("what's competition") || input.includes("what is competition")) {
         return "Competition is animals fighting for the same resources."  + "\n Maybe you could ask me " + r[Math.floor(Math.random()*r.length)]
     } else if (input.includes("competition occur")) {
         return "Competition occurs when two species occupy the same niche."  + "\n Maybe you could ask me " + r[Math.floor(Math.random()*r.length)]
